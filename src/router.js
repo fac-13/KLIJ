@@ -5,6 +5,10 @@ const router = (req, response) => {
 
   if (url === '/') {
     staticHandler(response, 'public/index.html');
+  } else if (url === '/dailyphoto') {
+    photoHandler(response, url);
+  } else if (url === '/userphoto') {
+    photoHandler(response, url);
   } else if (url.indexOf('public') !== -1) {
     staticHandler(response, url);
   } else {
