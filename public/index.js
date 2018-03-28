@@ -1,4 +1,5 @@
 /* eslint-disable */
+const buttonBlastOff = document.getElementById("submit-button");
 
 // client side generic XML request func to make requests to the server 
 function makeRequest(url, callback) {
@@ -25,7 +26,12 @@ dateField.addEventListener('input', function(){
 
 function createImg(response) {
   var img = document.querySelector('img');
-  img.setAttribute('src', response.hdurl);
+  img.setAttribute('src', response.url);
+}
+
+function getOldDates(e){
+  var date = input.value;
+  console.log(date);
 }
 
 function dateFormat(val) {
@@ -45,3 +51,6 @@ function dateFormat(val) {
   console.log(today);
   makeRequest('/api/search/?' + today, createImg);
 })();
+
+// dateField.addEventListener('input', function(){
+submit-button.addEventListener('click', getOldDates);
