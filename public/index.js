@@ -19,7 +19,14 @@ function makeRequest(url, callback) {
   xhr.send();
 }
 
+function clearOldContent(container){
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+}
+
 function createImg(response) {
+  clearOldContent(content);
   var title = document.createElement('h2');
   title.textContent = response.title;
   title.classList.add("content__title");
