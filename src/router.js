@@ -2,11 +2,10 @@ const { staticHandler, photoHandler } = require('./handler');
 
 const router = (req, res) => {
   const { url } = req;
-
   if (url === '/') {
     staticHandler('public/index.html', res);
   } else if (url.startsWith('/api/search')) {
-    photoHandler(req, res);
+    photoHandler(url, res);
   } else if (url.startsWith('/public')) {
     staticHandler(url, res);
   } else {
