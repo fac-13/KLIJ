@@ -26,12 +26,11 @@ const staticHandler = (filepath, res) => {
       res.end(file);
     }
   });
-  const req = `${apiUrl}api_key=${key}`;
-  serverApiCall(req, res);
 };
 
 const photoHandler = (url, res) => {
-  const date = '1995-10-02';
+  const dummyUrl = '/api/search/1995-10-02';
+  const date = dummyUrl.split('?')[1];
   const req = `${apiUrl}date=${date}&api_key=${key}`;
   serverApiCall(req, res);
 };
