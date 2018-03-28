@@ -13,21 +13,51 @@ body {
     color: hsl(250, 33%, 10%);
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
 .header {
+ border: 1px solid red;
+}
+
+.content {
+    border: 1px solid red;
+    min-width: 20rem;
+    min-height: 20rem;
+}
+
+.content__title {
 
 }
 
-.from {
+.content__img {
 
+}
+
+.content__photographer {
+
+}
+
+.content__explanation {
+    
+}
+
+.form {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .form__submit {
-
-}
-
-.container {
+    border: 1px solid red;
     
 }
+
 
 
 

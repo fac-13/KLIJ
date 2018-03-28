@@ -15,13 +15,14 @@
   <main>
     <h1 class="header">Picture of The Day</h1>
     
+    <section class="content js-content"></section>
+
     <form class="form">
       <label for="date">Find a past picture of the day</label>
-      <input id="date" type="date">
+      <input id="date" type="date" min="1995-06-16">
       <button id="submit-button" type="submit" class="form__submit">Blast Off!</button>
     </form>
 
-    <section class="content js-content"></section>
   </main>
   <script src="public/index.js"></script>
 </body>
