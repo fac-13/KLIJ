@@ -6,7 +6,8 @@ function makeRequest(url, callback) {
   xhr.addEventListener('load', function () {
     if (xhr.status === 200) {
       var response = xhr.responseText;
-      callback(response);
+      callback(JSON.parse(response));
+      console.log(response);
     } else {
       console.log(`Status code ${xhr.status}`);
     }
@@ -19,5 +20,28 @@ function makeRequest(url, callback) {
 var dateField = document.querySelector('#date');
 dateField.addEventListener('input', function(){
   console.log('date field stuff: ', dateField.value)
-  makeRequest('/api/search?' + dateField.value, createImg)
+  makeRequest('/api/search/?' + dateField.value, createImg)
 })
+
+function createImg(response) {
+  var img = document.querySelector('img');
+  img.setAttribute('src', response.hdurl);
+}
+
+function dateFormat(val) {
+  if (val<10){
+    return '0'+ val.toString();
+  }else{
+    return val;
+  }
+}
+
+(function(){
+  var today = new Date();
+  var dd = dateFormat(today.getDate());
+  var mm = dateFormat(today.getMonth()+1);
+  var yyyy = today.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd;
+  console.log(today);
+  makeRequest('/api/search/?' + today, createImg);
+})();

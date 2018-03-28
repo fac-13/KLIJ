@@ -29,10 +29,20 @@ const staticHandler = (filepath, res) => {
 };
 
 const photoHandler = (url, res) => {
-  const dummyUrl = '/api/search/1995-10-02';
-  const date = dummyUrl.split('?')[1];
+  // const dummyUrl = '/api/search/1995-10-02';
+  const date = url.split('?')[1];
   const req = `${apiUrl}date=${date}&api_key=${key}`;
-  serverApiCall(req, res);
+  console.log(req);
+  serverApiCall(req, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      console.log('data is here:', data);
+      res.end(data);
+    }
+  });
 };
 
 module.exports = { staticHandler, photoHandler };
