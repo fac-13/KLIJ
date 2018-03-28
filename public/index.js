@@ -10,7 +10,6 @@ function makeRequest(url, callback) {
     if (xhr.status === 200) {
       var response = xhr.responseText;
       callback(JSON.parse(response));
-      console.log(response);
     } else {
       console.log(`Status code ${xhr.status}`);
     }
@@ -38,7 +37,7 @@ function createImg(response) {
   appendFurtherContent(response);
 }
 
-function appendFurtherContent(response){
+function appendFurtherContent(response) {
   var photographer = document.createElement('h3');
   photographer.textContent = response.copyright;
   photographer.classList.add("content__photographer");
@@ -49,31 +48,46 @@ function appendFurtherContent(response){
   content.appendChild(explanation);
 }
 
-function getOldDates(e){
+function getOldDates(e) {
   e.preventDefault();
   var date = input.value;
-  console.log('input value date check: ', date);
-  makeRequest('/api/search/?' + date, createImg)
+  if (validDate(date)) {
+    document.querySelector('form').childNodes[1].textContent = 'Find a past picture of the day';
+    makeRequest('/api/search/?' + date, createImg)
+  } else {
+    document.querySelector('form').childNodes[1].textContent = "Enter a date between 16-06-1995 and " + todayDate();
+  }
+}
+
+function validDate(date) {
+  var minDate = new Date(1995, 6, 16).getTime();
+  var maxDate = Date.now();
+  date = new Date(date).getTime();
+
+  return minDate <= date && date <= maxDate
 }
 
 function dateFormat(val) {
-  if (val<10){
-    return '0'+ val.toString();
-  }else{
+  if (val < 10) {
+    return '0' + val.toString();
+  } else {
     return val;
   }
 }
 
-(function(){
+function todayDate(arg) {
   var today = new Date();
   var dd = dateFormat(today.getDate());
-  var mm = dateFormat(today.getMonth()+1);
+  var mm = dateFormat(today.getMonth() + 1);
   var yyyy = today.getFullYear();
-  today = yyyy + '-' + mm + '-' + dd;
-  console.log(today);
-  input.value=today;
+
+  return arg ?  yyyy + '-' + mm + '-' + dd : dd + '-' + mm + '-' + yyyy;
+}
+
+(function () {
+  var today = todayDate(true);
+  input.value = today;
   makeRequest('/api/search/?' + today, createImg);
 })();
 
-// dateField.addEventListener('input', function(){
-  buttonBlastOff.addEventListener('click', getOldDates);
+buttonBlastOff.addEventListener('click', getOldDates);
