@@ -45,6 +45,7 @@ function dateFormat(val) {
   var yyyy = today.getFullYear();
   today = yyyy + '-' + mm + '-' + dd;
   console.log(today);
+  input.value=today;
   makeRequest('/api/search/?' + today, createImg);
 })();
 
