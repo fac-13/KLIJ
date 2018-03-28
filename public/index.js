@@ -1,6 +1,7 @@
 /* eslint-disable */
 const buttonBlastOff = document.getElementById("submit-button");
 const input = document.getElementById("date");
+const content = document.querySelector(".js-content");
 
 // client side generic XML request func to make requests to the server 
 function makeRequest(url, callback) {
@@ -19,8 +20,26 @@ function makeRequest(url, callback) {
 }
 
 function createImg(response) {
-  var img = document.querySelector('img');
+  var title = document.createElement('h2');
+  title.textContent = response.title;
+  title.classList.add("content__title");
+  content.appendChild(title);
+  var img = document.createElement('img');
+  img.classList.add("content__img");
   img.setAttribute('src', response.url);
+  content.appendChild(img);
+  appendFurtherContent(response);
+}
+
+function appendFurtherContent(response){
+  var photographer = document.createElement('h3');
+  photographer.textContent = response.copyright;
+  photographer.classList.add("content__photographer");
+  content.appendChild(photographer);
+  var explanation = document.createElement('p');
+  explanation.textContent = response.explanation;
+  explanation.classList.add("content__explanation");
+  content.appendChild(explanation);
 }
 
 function getOldDates(e){
