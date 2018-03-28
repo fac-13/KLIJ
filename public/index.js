@@ -26,7 +26,7 @@ dateField.addEventListener('input', function(){
 
 function createImg(response) {
   var img = document.querySelector('img');
-  img.setAttribute('src', response.hdurl);
+  img.setAttribute('src', response.url);
 }
 
 function getOldDates(e){
