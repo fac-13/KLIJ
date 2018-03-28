@@ -1,4 +1,6 @@
 /* eslint-disable */
+const buttonBlastOff = document.getElementById("submit-button");
+const input = document.getElementById("date");
 
 // client side generic XML request func to make requests to the server 
 function makeRequest(url, callback) {
@@ -16,16 +18,16 @@ function makeRequest(url, callback) {
   xhr.send();
 }
 
-// Event listener for date input, makes request to server on change 
-var dateField = document.querySelector('#date');
-dateField.addEventListener('input', function(){
-  console.log('date field stuff: ', dateField.value)
-  makeRequest('/api/search/?' + dateField.value, createImg)
-})
-
 function createImg(response) {
   var img = document.querySelector('img');
-  img.setAttribute('src', response.hdurl);
+  img.setAttribute('src', response.url);
+}
+
+function getOldDates(e){
+  e.preventDefault();
+  var date = input.value;
+  console.log('input value date check: ', date);
+  makeRequest('/api/search/?' + date, createImg)
 }
 
 function dateFormat(val) {
@@ -45,3 +47,6 @@ function dateFormat(val) {
   console.log(today);
   makeRequest('/api/search/?' + today, createImg);
 })();
+
+// dateField.addEventListener('input', function(){
+  buttonBlastOff.addEventListener('click', getOldDates);

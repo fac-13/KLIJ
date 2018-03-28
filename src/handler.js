@@ -32,14 +32,14 @@ const photoHandler = (url, res) => {
   // const dummyUrl = '/api/search/1995-10-02';
   const date = url.split('?')[1];
   const req = `${apiUrl}date=${date}&api_key=${key}`;
-  console.log(req);
+  // console.log(req);
   serverApiCall(req, (err, data) => {
     if (err) {
-      console.log(err);
+      // console.log(err);
       res.end(err);
     } else {
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      console.log('data is here:', data);
+      // console.log('data is here:', data);
       res.end(data);
     }
   });
