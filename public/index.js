@@ -10,7 +10,6 @@ function makeRequest(url, callback) {
     if (xhr.status === 200) {
       var response = xhr.responseText;
       callback(JSON.parse(response));
-      console.log(response);
     } else {
       console.log(`Status code ${xhr.status}`);
     }
@@ -45,8 +44,20 @@ function appendFurtherContent(response){
 function getOldDates(e){
   e.preventDefault();
   var date = input.value;
-  console.log('input value date check: ', date);
+  if(validDate(date)){
+    document.querySelector('form').childNodes[1].textContent = 'Find a past picture of the day';
   makeRequest('/api/search/?' + date, createImg)
+  } else {
+    document.querySelector('form').childNodes[1].textContent = "Enter a date between 16-06-1995 and today";
+  }
+}
+
+function validDate(date) {
+  var minDate = new Date(1995, 6, 16).getTime();
+  var maxDate = Date.now();
+  date = new Date(date).getTime();
+
+  return minDate <= date && date <= maxDate
 }
 
 function dateFormat(val) {
@@ -63,7 +74,6 @@ function dateFormat(val) {
   var mm = dateFormat(today.getMonth()+1);
   var yyyy = today.getFullYear();
   today = yyyy + '-' + mm + '-' + dd;
-  console.log(today);
   input.value=today;
   makeRequest('/api/search/?' + today, createImg);
 })();
