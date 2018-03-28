@@ -30,7 +30,7 @@ function createImg(response) {
   appendFurtherContent(response);
 }
 
-function appendFurtherContent(response){
+function appendFurtherContent(response) {
   var photographer = document.createElement('h3');
   photographer.textContent = response.copyright;
   photographer.classList.add("content__photographer");
@@ -41,14 +41,14 @@ function appendFurtherContent(response){
   content.appendChild(explanation);
 }
 
-function getOldDates(e){
+function getOldDates(e) {
   e.preventDefault();
   var date = input.value;
-  if(validDate(date)){
+  if (validDate(date)) {
     document.querySelector('form').childNodes[1].textContent = 'Find a past picture of the day';
-  makeRequest('/api/search/?' + date, createImg)
+    makeRequest('/api/search/?' + date, createImg)
   } else {
-    document.querySelector('form').childNodes[1].textContent = "Enter a date between 16-06-1995 and today";
+    document.querySelector('form').childNodes[1].textContent = "Enter a date between 16-06-1995 and " + todayDate();
   }
 }
 
@@ -61,22 +61,26 @@ function validDate(date) {
 }
 
 function dateFormat(val) {
-  if (val<10){
-    return '0'+ val.toString();
-  }else{
+  if (val < 10) {
+    return '0' + val.toString();
+  } else {
     return val;
   }
 }
 
-(function(){
+function todayDate(arg) {
   var today = new Date();
   var dd = dateFormat(today.getDate());
-  var mm = dateFormat(today.getMonth()+1);
+  var mm = dateFormat(today.getMonth() + 1);
   var yyyy = today.getFullYear();
-  today = yyyy + '-' + mm + '-' + dd;
-  input.value=today;
+
+  return arg ?  yyyy + '-' + mm + '-' + dd : dd + '-' + mm + '-' + yyyy;
+}
+
+(function () {
+  var today = todayDate(true);
+  input.value = today;
   makeRequest('/api/search/?' + today, createImg);
 })();
 
-// dateField.addEventListener('input', function(){
-  buttonBlastOff.addEventListener('click', getOldDates);
+buttonBlastOff.addEventListener('click', getOldDates);
