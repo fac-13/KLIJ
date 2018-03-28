@@ -30,7 +30,7 @@ const staticHandler = (filepath, res) => {
 
 const photoHandler = (url, res) => {
   const dummyUrl = '/api/search/1995-10-02';
-  const date = dummyUrl.split('/')[3];
+  const date = dummyUrl.split('?')[1];
   const req = `${apiUrl}date=${date}&api_key=${key}`;
   serverApiCall(req, res);
 };
