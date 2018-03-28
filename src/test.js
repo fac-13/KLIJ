@@ -22,7 +22,6 @@ test('Testing home route returns a status code of 200', (t) => {
 test('Testing public route returns a status code of 200', (t) => {
   const files = {
     'style.css': 'css',
-    'dom.js': 'javascript',
     'index.js': 'javascript',
   };
   Object.keys(files).forEach((file) => {
