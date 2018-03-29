@@ -33,7 +33,7 @@ const photoHandler = (url, res) => {
   const req = `${apiUrl}date=${date}&api_key=${key}`;
   serverApiCall(req, (err, nasaRes, data) => {
     if (err) {
-      res.writeHead(500, { 'Content-Type': 'plain/test' });
+      res.writeHead(500, { 'Content-Type': 'plain/text' });
       res.end('There was a problem with NASA API');
     } else {
       res.writeHead(nasaRes.statusCode, { 'Content-Type': 'application/json' });
