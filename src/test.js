@@ -75,10 +75,8 @@ test('Testing if successfully called API', (t) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(res);
       t.deepEqual(res.statusCode, 200, 'Should return succes');
     }
     t.end();
   });
 });
-
