@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "dotenv": "^5.0.1",
+    "nock": "^9.2.3",
     "request": "^2.85.0"
   }
 }

@@ -1,6 +1,7 @@
 const { staticHandler, photoHandler } = require('./handler');
 
 const router = (req, res) => {
+  console.log(req.url)
   const { url } = req;
   if (url === '/') {
     staticHandler('public/index.html', res);
