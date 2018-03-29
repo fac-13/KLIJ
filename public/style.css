@@ -38,18 +38,18 @@ main {
 }
 
 .content__title {
-    color: pink;
+  color: pink;
 }
 
 .content__img {
+  max-width: 100%;
 }
 
 .content__photographer {
-
 }
 
 .content__explanation {
-    text-align: justify;
+  text-align: justify;
 }
 
 .form {
@@ -72,22 +72,22 @@ main {
 }
 
 .form__submit {
-    width: 50%;
-    max-width: 10rem;
-    font-size: 1.5rem;
-    padding: 0.5%;
-    text-align: center;
-    border: 2px solid black;
-    background: hsl(290, 80%, 50%);
-    color: #fbfcfd;
-    font-weight: 700;
-    border-radius: 0.6rem;
-    outline:none;
+  width: 50%;
+  max-width: 10rem;
+  font-size: 1.5rem;
+  padding: 0.5%;
+  text-align: center;
+  border: 2px solid black;
+  background: hsl(290, 80%, 50%);
+  color: #fbfcfd;
+  font-weight: 700;
+  border-radius: 0.6rem;
+  outline: none;
 }
 
 .form__submit:hover {
-    color: #302f2f;
-    background: #fbfcfd;
-    border: 2px solid #302f2f;
-    outline:none;
+  color: #302f2f;
+  background: #fbfcfd;
+  border: 2px solid #302f2f;
+  outline: none;
 }
