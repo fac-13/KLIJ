@@ -52,11 +52,11 @@ test('Testing random route returns a status code of 404', (t) => {
 });
 
 
-test.only('Testing nock is working', (t) => {
+test('Testing nock is working', (t) => {
   nock('https://api.nasa.gov/planetary/apod')
     .get('?date=2018-03-29')
     .replyWithError('There was a problem with NASA API');
-  serverApiCall('https://api.nasa.gov/planetary/apod?date=2018-03-29', (err, res) =>{
+  serverApiCall('https://api.nasa.gov/planetary/apod?date=2018-03-29', (err, res) => {
     if (err) {
       t.deepEqual(err, new Error('There was a problem with NASA API'), 'Should return error');
     } else {
@@ -66,16 +66,19 @@ test.only('Testing nock is working', (t) => {
   });
 });
 
-// console.log(websiteNock);
 
-test('trying to test API call', (t) => {
-  supertest(router)
-    .get('/api/search/?2018-03-28')
-    .expect(200)
-    .end((err, res) => {
+test('Testing if successfully called API', (t) => {
+  nock('https://api.nasa.gov/planetary/apod')
+    .get('?date=2018-03-29')
+    .reply(200, { planet: 'Jupiter', photographer: 'Lawrence' });
+  serverApiCall('https://api.nasa.gov/planetary/apod?date=2018-03-29', (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
       console.log(res);
-      t.error(err);
-      t.equal(res.statusCode, 200, 'Testing if teapot!!!');
-      t.end();
-    });
+      t.deepEqual(res.statusCode, 200, 'Should return succes');
+    }
+    t.end();
+  });
 });
+
