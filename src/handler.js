@@ -29,17 +29,14 @@ const staticHandler = (filepath, res) => {
 };
 
 const photoHandler = (url, res) => {
-  // const dummyUrl = '/api/search/1995-10-02';
   const date = url.split('?')[1];
   const req = `${apiUrl}date=${date}&api_key=${key}`;
-  // console.log(req);
-  serverApiCall(req, (err, data) => {
+  serverApiCall(req, (err, nasaRes, data) => {
     if (err) {
-      // console.log(err);
-      res.end(err);
+      res.writeHead(500, { 'Content-Type': 'plain/text' });
+      res.end('There was a problem with NASA API');
     } else {
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      // console.log('data is here:', data);
+      res.writeHead(nasaRes.statusCode, { 'Content-Type': 'application/json' });
       res.end(data);
     }
   });
