@@ -52,7 +52,7 @@ test('Testing random route returns a status code of 404', (t) => {
 });
 
 
-test.only('Testing nock is working', (t) => {
+test('Testing nock is working', (t) => {
   nock('https://api.nasa.gov/planetary/apod')
     .get('?date=2018-03-29')
     .replyWithError('There was a problem with NASA API');
