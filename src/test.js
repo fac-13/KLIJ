@@ -1,6 +1,8 @@
 const test = require('tape');
 const supertest = require('supertest');
+const nock = require('nock');
 const router = require('./router');
+const serverApiCall = require('./logic');
 
 test('Tape is working', (t) => {
   t.equal(1, 1, 'one should equal one');
@@ -47,4 +49,34 @@ test('Testing random route returns a status code of 404', (t) => {
       t.equal(res.statusCode, 404, 'Should return 404');
       t.end();
     });
+});
+
+
+test('Testing nock is working', (t) => {
+  nock('https://api.nasa.gov/planetary/apod')
+    .get('?date=2018-03-29')
+    .replyWithError('There was a problem with NASA API');
+  serverApiCall('https://api.nasa.gov/planetary/apod?date=2018-03-29', (err, res) => {
+    if (err) {
+      t.deepEqual(err, new Error('There was a problem with NASA API'), 'Should return error');
+    } else {
+      console.log(res);
+    }
+    t.end();
+  });
+});
+
+
+test('Testing if successfully called API', (t) => {
+  nock('https://api.nasa.gov/planetary/apod')
+    .get('?date=2018-03-29')
+    .reply(200, { planet: 'Jupiter', photographer: 'Lawrence' });
+  serverApiCall('https://api.nasa.gov/planetary/apod?date=2018-03-29', (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      t.deepEqual(res.statusCode, 200, 'Should return succes');
+    }
+    t.end();
+  });
 });
