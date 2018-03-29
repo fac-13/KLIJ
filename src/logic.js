@@ -5,7 +5,7 @@ const serverApiCall = (clientReq, cb) => {
     if (err) {
       cb(err);
     } else {
-      cb(body);
+      cb(null, res, body);
     }
   });
 };
