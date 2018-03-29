@@ -55,12 +55,12 @@ function getOldDates(e) {
     document.querySelector('form').childNodes[1].textContent = 'Find a past picture of the day';
     makeRequest('/api/search/?' + date, createImg)
   } else {
-    document.querySelector('form').childNodes[1].textContent = "Enter a date between 16-06-1995 and " + todayDate();
+    document.querySelector('form').childNodes[1].textContent = "Enter a date between 20-06-1995 and " + todayDate();
   }
 }
 
 function validDate(date) {
-  var minDate = new Date(1995, 6, 16).getTime();
+  var minDate = new Date('1995-6-20').getTime();
   var maxDate = Date.now();
   date = new Date(date).getTime();
 
