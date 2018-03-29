@@ -58,7 +58,7 @@ test.only('Testing nock is working', (t) => {
     .replyWithError('There was a problem with NASA API');
   serverApiCall('https://api.nasa.gov/planetary/apod?date=2018-03-29', (err, res) =>{
     if (err) {
-      t.equal(err, 'There was a problem with NASA API', 'Should return error');
+      t.deepEqual(err, new Error('There was a problem with NASA API'), 'Should return error');
     } else {
       console.log(res);
     }
